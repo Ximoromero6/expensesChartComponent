@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+/* Colors */
+
+$Soft_red: hsl(10,
+79%,
+65%);
+$Cyan: hsl(186,
+34%,
+60%);
+$Dark_brown: hsl(25,
+47%,
+15%);
+$Medium_brown: hsl(28,
+10%,
+53%);
+$Cream: hsl(27,
+66%,
+92%);
+$Very_pale_orange: hsl(33,
+100%,
+98%);
+
+/* End colors */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $Cream;
+}
+
+main {
+    max-width: 470px;
+    width: 100%;
+    margin: 15px;
+    .balanceContainer {
+        background-color: $Soft_red;
+        margin-bottom: 20px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 25px;
+        .balanceText {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: $Very_pale_orange;
+            .title {
+                font-size: 14px;
+                font-weight: 400;
+                margin-bottom: 5px;
+            }
+            .actualBalance {
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+        .containerLogo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .chartContainer {
+        background-color: $Very_pale_orange;
+        padding: 25px;
+        border-radius: 14px;
+        .spendingTitle {
+            color: $Dark_brown;
+        }
+        .chart {
+            height: 200px;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(35px, 1fr));
+            grid-gap: 15px;
+            align-items: flex-end;
+            .bar {
+                background-color: $Soft_red;
+                border-radius: 6px;
+                height: 100%;
+                cursor: pointer;
+                position: relative;
+                &.today {
+                    background-color: $Cyan;
+                }
+                .tooltip {
+                    visibility: hidden;
+                    background-color: $Dark_brown;
+                    color: $Very_pale_orange;
+                    text-align: center;
+                    font-weight: 600;
+                    border-radius: 4px;
+                    padding: 6px 8px;
+                    position: absolute;
+                    top: -38px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1;
+                    font-size: 14px;
+                }
+                &:hover {
+                    background-color: lighten($Soft_red, 5);
+                    &.today {
+                        background-color: lighten($Cyan, 5);
+                    }
+                    .tooltip {
+                        visibility: visible;
+                    }
+                }
+                small {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    bottom: -25px;
+                    font-weight: 400;
+                    color: $Medium_brown;
+                }
+            }
+        }
+        .separator {
+            border-top: 2px solid $Cream;
+            margin: 45px auto 25px auto;
+        }
+        .containerTotal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .textContainer {
+                display: flex;
+                flex-direction: column;
+                &:last-child {
+                    align-items: flex-end;
+                }
+                p {
+                    font-size: 14px;
+                    color: $Medium_brown;
+                }
+                .totalText {
+                    font-size: 30px;
+                    font-weight: 600;
+                }
+                .totalPercentage {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    @media(max-width: 576px) {
+        .chartContainer {
+            .chart {
+                grid-template-columns: repeat( auto-fit, minmax(20px, 1fr));
+                grid-gap: 10px;
+            }
+        }
+    }
+    @media(max-width: 300px) {
+        .chartContainer {
+            .containerTotal {
+                .textContainer {
+                    p {
+                        font-size: 12px;
+                    }
+                    .totalText {
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
